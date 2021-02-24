@@ -10,12 +10,6 @@
 .settings
 .springBeans
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
 ### NetBeans ###
 nbproject/private/
 build/
@@ -30,3 +24,27 @@ gocd/server/ssh/**
 !gocd/server/ssh/put-ssh-keys-here
 .vagrant/
 ubuntu-xenial-16.04-cloudimg-console.log
+
+# Java class files
+*.class
+
+# Eclipse project files
+.classpath
+.project
+.settings/
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+.DS_Store/
+.DS_Store
+
+target/
+/target
+/target/
+**/target/
+
+
