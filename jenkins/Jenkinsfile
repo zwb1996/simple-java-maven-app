@@ -1,10 +1,11 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.3.3'
-            args '-v /Users/taoxuefei/.m2:/root/.m2'
-        }
-    }
+       agent any
+//     agent {
+//         docker {
+//             image 'maven:3.3.3'
+//             args '-v /Users/taoxuefei/.m2:/root/.m2'
+//         }
+//     }
     stages {
         stage('Compile') {
             steps {
@@ -32,10 +33,10 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-            }
-        }
+//         stage('Deliver') {
+//             steps {
+//                 sh './jenkins/scripts/deliver.sh'
+//             }
+//         }
     }
 }
