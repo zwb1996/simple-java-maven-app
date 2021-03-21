@@ -1,42 +1,42 @@
 pipeline {
     agent any
     stages {
-        stage('静态检查') {
+        stage('Static Inspect') {
             steps {
                 bat 'mvn clean'
             }
         }
-        stage('编译打包') {
+        stage('Compile and Package') {
             steps {
                 bat 'mvn clean'
             }
         }
-        stage('单元测试') {
+        stage('Unit Test') {
             steps {
                 bat 'mvn clean'
             }
         }
-        stage('组件测试') {
+        stage('Component Test') {
             steps {
                 bat 'mvn clean'
             }
         }
-        stage('功能测试') {
+        stage('Smoke/Acceptance Test') {
             steps {
                 bat 'mvn clean'
             }
         }
-        stage('测试环境部署') {
+        stage('Deploy to Testing Env') {
             steps {
                 bat 'mvn clean'
             }
         }
-        stage('性能测试') {
+        stage('Performance Test') {
             steps {
                 bat 'mvn clean'
             }
         }
-        stage('生产环境部署') {
+        stage('Deploy to Production Env') {
             steps {
                 bat 'mvn clean'
             }
