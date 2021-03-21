@@ -1,45 +1,44 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.3.3'
-            args '-v /Users/taoxuefei/.m2:/root/.m2'
-        }
-    }
+    agent any
     stages {
-        stage('Compile') {
+        stage('静态检查') {
             steps {
-                sh 'mvn -B clean compile'
+                bat 'mvn clean'
             }
         }
-        stage('Test') {
+        stage('编译打包') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                bat 'mvn clean'
             }
         }
-        stage('Site') {
+        stage('单元测试') {
             steps {
-                sh 'mvn site'
-            }
-            post {
-                always {
-                    cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'target/site/cobertura/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'site report'])
-                }
+                bat 'mvn clean'
             }
         }
-        stage('tzs check') {
+        stage('组件测试') {
             steps {
-                input "Does the staging environment look ok?"
+                bat 'mvn clean'
             }
         }
-        stage('Deliver') {
+        stage('功能测试') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                bat 'mvn clean'
+            }
+        }
+        stage('测试环境部署') {
+            steps {
+                bat 'mvn clean'
+            }
+        }
+        stage('性能测试') {
+            steps {
+                bat 'mvn clean'
+            }
+        }
+        stage('生产环境部署') {
+            steps {
+                bat 'mvn clean'
             }
         }
     }
