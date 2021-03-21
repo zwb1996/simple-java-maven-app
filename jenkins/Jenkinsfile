@@ -6,9 +6,14 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('Compile') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -B clean compile'
+            }
+        }
+        stage('Site') {
+            steps {
+                sh 'mvn site'
             }
         }
         stage('Test') {
@@ -18,17 +23,8 @@ pipeline {
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Site') {
-            steps {
-                sh 'mvn site'
-            }
-            post {
-                always {
-//                     cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'target/site/cobertura/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
-                publishCoverage adapters: [coberturaAdapter('target/site/cobertura/coverage.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
+                    publishCoverage adapters: [coberturaAdapter('target/site/cobertura/coverage.xml')], sourceFileResolver: sourceFiles('NEVER_STORE')
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'site report'])
                 }
             }
         }
