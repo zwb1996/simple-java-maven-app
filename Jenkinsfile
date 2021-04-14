@@ -29,6 +29,22 @@ pipeline {
                 always {
                     cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'target/site/cobertura/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'site report'])
+                    findbugs('**/findbugsXml.xml', false) {
+                        healthLimits(3, 20)
+                        thresholdLimit('high')
+                        defaultEncoding('UTF-8')
+                        canRunOnFailed(true)
+                        useStableBuildAsReference(true)
+                        useDeltaValues(true)
+                        computeNew(true)
+                        shouldDetectModules(true)
+                        thresholds(
+                                unstableTotal: [all: 1, high: 2, normal: 3, low: 4],
+                                failedTotal: [all: 5, high: 6, normal: 7, low: 8],
+                                unstableNew: [all: 9, high: 10, normal: 11, low: 12],
+                                failedNew: [all: 13, high: 14, normal: 15, low: 16]
+                        )
+                        }
                 }
             }
         }
