@@ -29,6 +29,7 @@ pipeline {
                 always {
                     cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'target/site/cobertura/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'site report'])
+                    findbugs canComputeNew£ºfalse£¬defaultEncoding£º''£¬excludePattern£º''£¬healthy£º''£¬includePattern£º''£¬pattern£º'**/target/findbugsXml.xml'£¬unHealthy£º''
                 }
             }
         }
