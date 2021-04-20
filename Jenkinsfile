@@ -29,15 +29,14 @@ pipeline {
                 always {
                     cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'target/site/cobertura/coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: 'site report'])
-//                     findbugs canComputeNew: false, defaultEncoding: '', excludePattern: '', healthy: '', includePattern: '', pattern: '**/target/findbugsXml.xml', unHealthy: ''
                 }
             }
         }
-        stage('tzs check') {
-            steps {
-                input "Does the staging environment look ok?"
-            }
-        }
+//         stage('tzs check') {
+//             steps {
+//                 input "Does the staging environment look ok?"
+//             }
+//         }
         stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
